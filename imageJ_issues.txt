@@ -43,3 +43,10 @@ Alternatives:
 If you're still having trouble opening a file, other image processing software like GIMP or QuPath might be able to handle it. 
 
 
+When I try to open this, it opens but probably not the whole thing:
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<Out of memory>
+<All available memory (11580MB) has been>
+<used. To make more available, use the>
+<Edit>Options>Memory & Threads command.>
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
