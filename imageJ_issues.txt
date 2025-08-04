@@ -87,5 +87,21 @@ how to open the windows command line?
 Press the Windows key + r. In the Run box, type cmd, and then click Ok. This opens the Command Prompt window.
 
 cd C:\opt\Fiji.app
+ImageJ-win64.exe --ij2 --headless --console --run "C:\Users\shra13\Desktop/hello.py"
+
+For all methods including java, you can refer: https://imagej.net/tutorials/open-an-image
+
+https://imagej.net/scripting/
+https://imagej.net/scripting/python
+https://imagej.net/scripting/script-editor
+https://imagej.net/scripting/headless
+https://imagej.net/learn/headless
+
+https://imagej.net/imagej-wiki-static/Jython_Scripting_Examples
+https://docs.python.org/3/library/io.html
+https://stackoverflow.com/questions/21140840/run-fiji-from-command-line
+
+
+
 
 
