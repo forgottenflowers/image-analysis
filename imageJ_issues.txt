@@ -1,0 +1,45 @@
+Fiji message at save:
+"Stack is larger than 4GB. Most TIFF readers will only open the first image. Use this information to open as raw:
+name=Untitled, dir=, width=2648, height=2648, nImages=2048, offset=375, type=ushort, byteOrder=big, format=0, url=, whiteIsZero=f, lutSize=0, comp=1, ranges=null, samples=1"
+
+When dealing with TIFF image stacks larger than 4GB, many standard TIFF readers will only open the first image due to the 4GB file size limitation of the standard TIFF format. To access the entire stack, it's necessary to open the file as raw data and interpret the header information. This approach allows you to bypass the limitations of the TIFF reader and access the individual images within the stack. 
+Here's a breakdown of why this happens and how to address it:
+
+Problem:
+4GB Limit:
+Standard TIFF files use 32-bit offsets, which inherently limit their size to around 4GB. 
+BigTIFF:
+For larger files, the BigTIFF format, which uses 64-bit offsets, is needed to support files larger than 4GB. 
+
+ImageJ's Behavior:
+ImageJ, when saving TIFF stacks larger than 4GB, often uses a non-standard format where it saves a fake TIFF header with the first image and then appends the rest of the image data (as raw data) to the end of the file. 
+
+Reader Limitation:
+Many image readers are not designed to handle this non-standard format and will only recognize the initial header, effectively displaying only the first image. 
+Solution: Open as Raw
+1. Identify the Image Properties:
+You'll need to know the image's dimensions (width and height), the number of images (nImages), the data type (e.g., byte, short, float), and byte order (big-endian or little-endian). 
+This information is often provided in the log message generated when saving the file or in a separate metadata file. 
+For example, ImageJ might provide this information when it saves a large TIFF stack. 
+2. Use a Raw Image Reader:
+Use a software or script that allows you to open a file as raw data and specify the header information. 
+For example, in Matlab, you could use functions like fopen, fread, and reshape to read the raw data and reconstruct the image stack. 
+Specialized libraries like TIFFStack (GitHub) DylanMuir/TIFFStack: Support for ImageJ's fake TIF files, when file size is > 4Gb · Issue #7 · DylanMuir/TIFFStack or other tools designed for handling BigTIFFs or raw image data might be necessary. 
+3. Handle the File Structure:
+If the TIFF stack was saved with a raw data section appended to the end (as is common with ImageJ), you'll need to read the raw data accordingly, potentially skipping the initial TIFF header. 
+
+
+
+ImageJ can generally open TIFF files it has created, but it might encounter issues with certain TIFF types, especially those created with specific configurations or those exceeding certain size limitations. ImageJ's own TIFF reader has limitations and might not handle all valid TIFF files correctly, including some that are written by other software. 
+
+ImageJ's TIFF Reader:
+ImageJ has a built-in TIFF reader that is known to be fast but has limitations. It may not correctly open some valid TIFF files, especially those with out-of-order planes or those that are very large, according to the ImageJ website. 
+"Fake" TIFFs:
+ImageJ can create "fake" TIFF files where a single TIFF image is followed by a binary data file, and the whole thing is saved as a TIFF. This can cause issues when trying to open these files in other software or even in ImageJ itself if it's not using its own reader. 
+
+Bio-Formats Plugin:
+If you encounter problems opening a TIFF file in ImageJ, it's often recommended to use the Bio-Formats plugin, which is more robust in handling different TIFF variations and other file formats. 
+Alternatives:
+If you're still having trouble opening a file, other image processing software like GIMP or QuPath might be able to handle it. 
+
+
