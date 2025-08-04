@@ -50,3 +50,42 @@ When I try to open this, it opens but probably not the whole thing:
 <used. To make more available, use the>
 <Edit>Options>Memory & Threads command.>
 >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+
+A thread:
+https://forum.image.sc/t/convert-vff-format-to-tiff/82974
+- Hi Curtis, our image processing team needs to import an image sequence in volume or VFF format and save or export as TIFF. How do we do this in ImageJ. We have been using Dragonfly, but were hoping that the ImageJ team could help us do this diectly in ImageJ. Is there a plugin for this perhaps?
+- The first thing I would suggest is to try to use Fiji to open your VFF file, then save the resulting image to a TIFF. Fiji comes with Bioformats, which says it can open VFF files, so I’m hopeful that it will be straightforward.
+- Hi, I tried to open the image sequence in both ImageJ and Fiji and also tried Bioformats. The software does not recognize .vol or .vgi formats, even using bioformats. Any suggestions?
+- are your vgi/vol related to x-ray images processed with VGStudioMax (.vgi some kB, .vol several GB size)? If not, skip reading.
+
+The .vgi is plain text, open it with Drag and Drop to the “>>”-Button (rightmost button) or in any text editor. The *.vol is a binary file, open it with File / Import / Raw… and enter the values you find in the *.vgi:
+
+Image type: search for “bitsperelement”, “datatype” and “data range”, e.g. for “bitsperelement = 16”, “datatype = unsigned integer” and “datarange = 0 65535” you use Image type “16-bit Unsigned”
+Width, Height, Number of images: look for “Size” and take the 3 numbers in this line
+Offset to first image = 0
+Gap between images = 0
+Little-endian byte order = ticked
+Before saving the tiff take the values in the lines starting with “resolution” and “unit” and set Pixel width / Pixel height / Voxel depth according to these values.
+
+There may be mirroring necessary search for “Mirror = 0 0 0”, if one of these is a 1 the corresponding dimension is mirrored. You need enough memory, at least the size of the *.vol (x × y × z × bit-depth), otherwise open it as virtual stack.
+
+Best regards,
+Guenter Pudmich
+
+
+
+
+
+File>New>Script
+
+
+how to open the windows command line?
+Press the Windows key + r. In the Run box, type cmd, and then click Ok. This opens the Command Prompt window.
+
+cd C:\opt\Fiji.app
+
+
