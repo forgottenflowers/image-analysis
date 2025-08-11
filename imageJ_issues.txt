@@ -101,7 +101,38 @@ https://imagej.net/imagej-wiki-static/Jython_Scripting_Examples
 https://docs.python.org/3/library/io.html
 https://stackoverflow.com/questions/21140840/run-fiji-from-command-line
 
+----------
+
+The script so far:
+
+from ij import IJ
+imp = IJ.openImage("R:/tomo/Shreya/2505_soleil_recon/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif")
+IJ.saveAs(imp, "Tiff", "R:/tomo/Shreya/out.tif")
+print("Image saved successfully.")
 
 
 
+cd C:\opt\Fiji_Interdent_Oleksandra\Fiji.app
+ImageJ-win64_Interdent.exe --ij2 --headless --console --run "C:\Users\sysgen\Desktop\hello.py"
+
+from ij import IJ
+imp = IJ.openImage("E:/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif")
+IJ.saveAs(imp, "Tiff", "D:/out.tif")
+print("Image saved successfully.")
+
+C:\opt\Fiji_Interdent_Oleksandra\Fiji.app>Stack is larger than 4GB. Most TIFF readers will only open the first image. Use this information to open as raw:
+name=Untitled, dir=, width=2648, height=2648, nImages=2048, offset=218, gap=0, type=, byteOrder=big, format=0, url=, whiteIsZero=f, lutSize=0, comp=1, ranges=null, samples=1
+Image saved successfully.
+
+
+
+#Go to Plugins → Macros → Record… (choose "Macro" mode)
+run("Raw...", "open=D:/trial_data/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.vol image=[16-bit Unsigned] width=2648 height=2648 number=2048 little-endian");
+close();
+
+
+C:\opt\Fiji_Interdent_Oleksandra\Fiji.app>Stack is larger than 4GB. Most TIFF readers will only open the first image. Use this information to open as raw:
+name=Untitled, dir=, width=2648, height=2648, nImages=2048, offset=218, gap=0, type=, byteOrder=big, format=0, url=, whiteIsZero=f, lutSize=0, comp=1, ranges=null, samples=1
+Image saved successfully.
+Time elapsed: 501.14 seconds
 
