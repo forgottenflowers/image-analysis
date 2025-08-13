@@ -1,6 +1,6 @@
-from ij import IJ
-imp = IJ.openImage("C:/opt/Fiji.app/images/about/about2.tif")
+#Remember, in this computer it opens only 855/2048 images in the stack, so we save a smaller image I think.
 
-#for current image you would use imp = IJ.getImage() instead
-IJ.saveAs(imp, "Tiff", "C:/Users/shra13/Desktop/out.tif")
+from ij import IJ
+imp = IJ.openImage("R:/tomo/Shreya/2505_soleil_recon/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif")
+IJ.saveAs(imp, "Tiff", "R:/tomo/Shreya/out.tif")
 print("Image saved successfully.")
