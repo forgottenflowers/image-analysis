@@ -1,36 +1,37 @@
 from ij import IJ
 import time
 
-# Input parameters, image properties
-in_path = "D:/trial_data/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.vol"
-in_x = 2648
-in_y = 2648
-in_z = 2048
+# Input parameters
+vol_info_path = "G:/trial_data/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0.vol.info"
+vol_data_path = vol_info_path.replace("0.vol.info", "0_16b.vol")
+out_path = "G:/trial_data/out.tif"
 
-# Output path	
-out_path = "D:/out.tif"
-
+# Read parameters from info file
+params = {}
+with open(vol_info_path, "r") as f:
+    for line in f:
+        if "=" in line:
+            key, val = line.strip().split("=")
+            params[key.strip()] = val.strip()
+ 
 # Image properties
-image_type = "[16-bit Unsigned]"
-endian = "little-endian"
-
-start_time = time.time()
-
-## Raw import options:
-# "<bit-depth> <signed(1)/unsigned(0)> <little-endian(1)/big-endian(0)> <white-is zero(1)/no(0)>"
-#options = "16 0 1 0"
-## Use ImageJ's Raw plugin directly in headless mode
-#IJ.run("Raw...", "open={} width={} height={} number={} options='{}'".format(in_path, in_x, in_y, in_z, options))
+x = int(params["NUM_X"])
+y = int(params["NUM_Y"])
+z = int(params["NUM_Z"])
+endian = "little-endian" if params["BYTEORDER"].upper() == "LOWBYTEFIRST" else "big-endian"
+image_type = "[16-bit Unsigned]"  #default
 
 # Build the macro string step by step
 macro_string = (
-    "open=" + in_path + " " +
-    "image=" + "[16-bit Unsigned]" + " " +
-    "width=" + str(in_x) + " " +
-    "height=" + str(in_y) + " " +
-    "number=" + str(in_z) + " " +
+    "open=" + vol_data_path + " " +
+    "image=" + image_type + " " +
+    "width=" + str(x) + " " +
+    "height=" + str(y) + " " +
+    "number=" + str(z) + " " +
     endian
 )
+
+start_time = time.time()
 
 # Run the raw import exactly like GUI
 IJ.run("Raw...", macro_string)
