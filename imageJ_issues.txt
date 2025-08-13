@@ -137,6 +137,7 @@ Image saved successfully.
 Time elapsed: 501.14 seconds
 
 ---------- 13.08.2025 (RX Recon)
+Reading vol info
 
 cd C:\opt\Fiji.app
 ImageJ-win64.exe --ij2 --headless --console --run "C:\Users\shra13\Desktop\hello.py"
@@ -147,5 +148,16 @@ Stack is larger than 4GB. Most TIFF readers will only open the first image. Use 
 name=Untitled, dir=, width=2648, height=2648, nImages=2048, offset=206, type=ushort, byteOrder=big, format=0, url=, whiteIsZero=f, lutSize=0, comp=1, ranges=null, samples=1
 Image saved successfully.
 Time elapsed: 301.52 seconds
+
+Trying to generate big tiff
+
+out_path_ome = out_path.replace(".tif", ".ome.tif")
+IJ.run(imp, "Bio-Formats Exporter", "save="+out_path_ome)
+
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release
+Switching to BigTIFF (by file size)
+Image saved successfully.
+Time elapsed: 1316.64 seconds
 
 
