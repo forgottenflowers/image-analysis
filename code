@@ -1,10 +1,19 @@
 from ij import IJ
 import time
+import os
 
 # Input parameters
-vol_info_path = "G:/trial_data/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0.vol.info"
-vol_data_path = vol_info_path.replace("0.vol.info", "0_16b.vol")
-out_path = "G:/trial_data/out.tif"
+
+# vol data file name: 055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0
+# folder name: 055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj
+# vol file name: 055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.vol
+
+vol_info_path = "G:/trial_data/vol_info/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0.vol.info"
+filename = os.path.basename(vol_info_path) #with ext
+foldername = filename.replace("_0.vol.info","")
+vol_data_path = "G:/trial_data/" + foldername + "/" + filename.replace("0.vol.info", "0_16b.vol")
+out_path = "G:/trial_data/" + filename.replace("0.vol.info", "0_16b.tif")
+
 
 # Read parameters from info file
 params = {}
@@ -13,7 +22,8 @@ with open(vol_info_path, "r") as f:
         if "=" in line:
             key, val = line.strip().split("=")
             params[key.strip()] = val.strip()
- 
+            
+
 # Image properties
 x = int(params["NUM_X"])
 y = int(params["NUM_Y"])
