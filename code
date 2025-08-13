@@ -40,7 +40,9 @@ IJ.run("Raw...", macro_string)
 imp = IJ.getImage()
 
 # Save as TIF
-IJ.saveAs(imp, "Tiff", out_path)
+#IJ.saveAs(imp, "Tiff", out_path)
+out_path_ome = out_path.replace(".tif", ".ome.tif")
+IJ.run(imp, "Bio-Formats Exporter", "save="+out_path_ome)
 
 # Close image to free memory
 imp.close()
