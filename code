@@ -1,3 +1,9 @@
 print('Hello ')
+path = "C:/opt/Fiji.app/images/about/about1.tif"
 
-#COMMAND LINE: ImageJ-win64.exe --ij2 --headless --console --run "C:/Users/shra13/Desktop/hello.py"
+#@ DatasetIOService io
+image = io.open(path)
+
+#@ UIService ui
+ui.show(image)
+print('Bye ')
