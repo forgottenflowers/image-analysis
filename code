@@ -1,0 +1,4 @@
+#@String name
+print('Hello ' + name)
+  
+#COMMAND LINE: ImageJ-win64.exe --ij2 --headless --console --run "C:\Users\shra13\Desktop/hello.py" "name='Mr Kraken'"
