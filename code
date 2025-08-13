@@ -1,9 +1,6 @@
-print('Hello ')
-path = "C:/opt/Fiji.app/images/about/about1.tif"
+from ij import IJ
+imp = IJ.openImage("C:/opt/Fiji.app/images/about/about2.tif")
 
-#@ DatasetIOService io
-image = io.open(path)
-
-#@ UIService ui
-ui.show(image)
-print('Bye ')
+#for current image you would use imp = IJ.getImage() instead
+IJ.saveAs(imp, "Tiff", "C:/Users/shra13/Desktop/out.tif")
+print("Image saved successfully.")
