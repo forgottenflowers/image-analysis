@@ -101,7 +101,7 @@ https://imagej.net/imagej-wiki-static/Jython_Scripting_Examples
 https://docs.python.org/3/library/io.html
 https://stackoverflow.com/questions/21140840/run-fiji-from-command-line
 
-----------
+---------- 11.08.2025 (SuperMicro)
 
 The script so far:
 
@@ -135,4 +135,17 @@ C:\opt\Fiji_Interdent_Oleksandra\Fiji.app>Stack is larger than 4GB. Most TIFF re
 name=Untitled, dir=, width=2648, height=2648, nImages=2048, offset=218, gap=0, type=, byteOrder=big, format=0, url=, whiteIsZero=f, lutSize=0, comp=1, ranges=null, samples=1
 Image saved successfully.
 Time elapsed: 501.14 seconds
+
+---------- 13.08.2025 (RX Recon)
+
+cd C:\opt\Fiji.app
+ImageJ-win64.exe --ij2 --headless --console --run "C:\Users\shra13\Desktop\hello.py"
+
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release
+Stack is larger than 4GB. Most TIFF readers will only open the first image. Use this information to open as raw:
+name=Untitled, dir=, width=2648, height=2648, nImages=2048, offset=206, type=ushort, byteOrder=big, format=0, url=, whiteIsZero=f, lutSize=0, comp=1, ranges=null, samples=1
+Image saved successfully.
+Time elapsed: 301.52 seconds
+
 
