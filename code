@@ -1,6 +1,50 @@
-#Remember, in this computer it opens only 855/2048 images in the stack, so we save a smaller image I think.
-
 from ij import IJ
-imp = IJ.openImage("R:/tomo/Shreya/2505_soleil_recon/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif")
-IJ.saveAs(imp, "Tiff", "R:/tomo/Shreya/out.tif")
+import time
+
+# Input parameters, image properties
+in_path = "D:/trial_data/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.vol"
+in_x = 2648
+in_y = 2648
+in_z = 2048
+
+# Output path	
+out_path = "D:/out.tif"
+
+# Image properties
+image_type = "[16-bit Unsigned]"
+endian = "little-endian"
+
+start_time = time.time()
+
+## Raw import options:
+# "<bit-depth> <signed(1)/unsigned(0)> <little-endian(1)/big-endian(0)> <white-is zero(1)/no(0)>"
+#options = "16 0 1 0"
+## Use ImageJ's Raw plugin directly in headless mode
+#IJ.run("Raw...", "open={} width={} height={} number={} options='{}'".format(in_path, in_x, in_y, in_z, options))
+
+# Build the macro string step by step
+macro_string = (
+    "open=" + in_path + " " +
+    "image=" + "[16-bit Unsigned]" + " " +
+    "width=" + str(in_x) + " " +
+    "height=" + str(in_y) + " " +
+    "number=" + str(in_z) + " " +
+    endian
+)
+
+# Run the raw import exactly like GUI
+IJ.run("Raw...", macro_string)
+
+# Get the active image (ImagePlus object)
+imp = IJ.getImage()
+
+# Save as TIF
+IJ.saveAs(imp, "Tiff", out_path)
+
+# Close image to free memory
+imp.close()
+
+end_time = time.time()
+elapsed = end_time - start_time
 print("Image saved successfully.")
+print("Time elapsed: {:.2f} seconds".format(elapsed))
