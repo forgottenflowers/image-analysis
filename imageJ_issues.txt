@@ -160,4 +160,16 @@ Switching to BigTIFF (by file size)
 Image saved successfully.
 Time elapsed: 1316.64 seconds
 
+---------- 18.08.2025 (RX Recon) Testing looping
+
+cd C:\opt\Fiji.app
+ImageJ-win64.exe --ij2 --headless --console --run "C:\Users\shra13\Desktop\hello.py"
+
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release
+Stack is larger than 4GB. Most TIFF readers will only open the first image. Use this information to open as raw:
+name=Untitled, dir=, width=2648, height=2648, nImages=2048, offset=206, type=ushort, byteOrder=big, format=0, url=, whiteIsZero=f, lutSize=0, comp=1, ranges=null, samples=1
+(u'G:/trial_data/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif', '    Time elapsed: 285.79 seconds')
+
+ok, last line was corrected, now we shall try both
 
