@@ -44,6 +44,10 @@ imp = IJ.getImage()
 out_path_ome = out_path.replace(".tif", ".ome.tif")
 IJ.run(imp, "Bio-Formats Exporter", "save="+out_path_ome)
 
+#try this
+#IJ.run(imp, "Bio-Formats Exporter", f"save={out_path_ome} compression=None")
+
+
 # Close image to free memory
 imp.close()
 
