@@ -18,28 +18,25 @@ logging.basicConfig(filename="C:/Users/shra13/Desktop/shreya_log_file.txt", leve
 
 # Get all .vol.info files
 vol_info_files = glob.glob(os.path.join(vol_info_dir, "*.vol.info"))
-#vol_info_path = "G:/trial_data/vol_info/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0.vol.info"
 
 # Loop over each .vol.info file
 for vol_info_path in vol_info_files:
 
     start_time = time.time()
+    print("working...")
     
     # Path to the matching .vol file
-    infofilename = os.path.basename(vol_info_path) #with extensions
+    infofilename = os.path.basename(vol_info_path)  #with extensions
     datafoldername = infofilename.replace("_0.vol.info","") 
     vol_data_path = vol_data_dir + "/" + datafoldername + "/" + datafoldername + "_0_16b.vol"
-    #vol_data_path = "G:/trial_data/" + foldername + "/" + filename.replace("0.vol.info", "0_16b.vol")
     
     # Skip if file does not exist
     if not os.path.exists(vol_data_path):
         logging.info("Skipping, file not found: %s", vol_data_path)
-        # print("Skipping, file not found: " + vol_data_path)
         continue
     
     # Path to output file
     out_path = vol_data_dir + "/" + datafoldername + "/" + datafoldername + "_0_16b.tif"
-    #out_path = "G:/trial_data/" + filename.replace("0.vol.info", "0_16b.tif")
  
     # Read parameters from info file
     params = {}
@@ -77,6 +74,5 @@ for vol_info_path in vol_info_files:
 
     elapsed = time.time() - start_time
     logging.info("%s    Time elapsed: %.2f seconds", out_path, elapsed)
-    # print(out_path + "    Time elapsed: {:.2f} seconds".format(elapsed))
 
 print("done...")
