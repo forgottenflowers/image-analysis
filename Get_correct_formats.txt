@@ -175,7 +175,7 @@ ok, last line was corrected, now we shall try both
 
 
 
-------------- 01.09.2025 (OME Tiffs)
+------------- 01.09.2025 (OME Tiffs) (SuperMicro)
 
 Everything worked great and I have all the fake tiffs. Now I try to convert them to OME tiffs using parallel processing on PowerShell.
 I have already created a new folder inside C:/opt/ called Fiji_Shreya, and added to the library. (copy this to personal hard drive)
@@ -184,4 +184,12 @@ I have already created a new folder inside C:/opt/ called Fiji_Shreya, and added
 > Copy-paste the main code (with correct paths) to the same directory as well
 > Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
   (run to allow script execution for this session only)
-> .\convert_fake_tiffs.ps1
+> convert_fake_tiffs.ps1
+
+Had to copy paste everything and save as "All files" not .txt files. I think its a Supermicro problem that doesn't allow to view and edit extensions easily.
+
+Next, updating Power Shell, coz 'Parallel' variable wasn't recognized.
+https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5
+Ok doesn't work without admin rights. Updating script...
+
+
