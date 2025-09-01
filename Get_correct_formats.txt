@@ -194,6 +194,26 @@ Ok doesn't work without admin rights. Updating script...
 
 Manually had to edit Java Home environments in the .bat files. Nope doesn't work.
 
+# Set Java for this session
+$env:JAVA_HOME = "C:\opt\Fiji_Shreya\Fiji.app\lib"
+$env:PATH = "$env:JAVA_HOME\bin;$env:PATH"
+# Optional: test
+java -version
+# Now run bioformats2raw
+& "C:\tools\bioformats2raw\bin\bioformats2raw.bat" "E:\YourDataFolder\example_fake.tif" "E:\YourDataFolder\example.zarr"
+
+Get-ChildItem
+(useful command)
+
+fail fail fail until:
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -version
+
+openjdk version "1.8.0_322"
+OpenJDK Runtime Environment (Zulu 8.60.0.21-CA-win64) (build 1.8.0_322-b06)
+OpenJDK 64-Bit Server VM (Zulu 8.60.0.21-CA-win64) (build 25.322-b06, mixed mode)
+
+
+
 
 
 
