@@ -192,4 +192,8 @@ Next, updating Power Shell, coz 'Parallel' variable wasn't recognized.
 https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5
 Ok doesn't work without admin rights. Updating script...
 
+Manually had to edit Java Home environments in the .bat files. Nope doesn't work.
+
+
+
 
