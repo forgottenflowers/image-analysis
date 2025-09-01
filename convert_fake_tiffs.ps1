@@ -1,4 +1,4 @@
-# We want ro convert the previously generated imageJ fake tiffs to OME tiffs for Ease of usage on Amira
+# We want ro convert the previously generated imageJ fake tiffs to OME tiffs for ease of usage on Amira
 
 # ---------- USER SETTINGS ----------
 # Path to .bat launchers
