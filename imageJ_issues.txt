@@ -173,3 +173,15 @@ name=Untitled, dir=, width=2648, height=2648, nImages=2048, offset=206, type=ush
 
 ok, last line was corrected, now we shall try both
 
+
+
+------------- 01.09.2025 (OME Tiffs)
+
+Everything worked great and I have all the fake tiffs. Now I try to convert them to OME tiffs using parallel processing on PowerShell.
+I have already created a new folder inside C:/opt/ called Fiji_Shreya, and added to the library. (copy this to personal hard drive)
+> Just look for and open windows powershell
+> Set path to the directory with all the tiff files: cd E:/soleil_recon/trial_data/tiffs
+> Copy-paste the main code (with correct paths) to the same directory as well
+> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+  (run to allow script execution for this session only)
+> .\convert_fake_tiffs.ps1
