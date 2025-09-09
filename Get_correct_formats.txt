@@ -238,6 +238,7 @@ To check things are wired up correctly before using the command, run
 & "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\bioformats_package.jar"  loci.formats.tools.BfConvert
 
 Error: Could not find or load main class loci ...
+(initially there was problem with which files to unzip. Finally, you can see the ones in my Fiji (the others are still zipped. And by date you can find which ones were downloaded today.)
 
 We need all jars, so
 
@@ -376,6 +377,24 @@ Ok so now back to the original command:
 It works very well! Tested in Amira. Now testing a different path (in shared drive)...
 
 & "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*;" loci.formats.tools.ImageConverter "T:\tomo\Shreya\2505_soleil_recon_FijiTIFfiles\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif" "T:\tomo\Shreya\2505_soleil_recon_OMEfiles\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.ome.tif"
+
+Ok it seems like it's gonna work. So next task, loop through all files in the folder and generate corresponding files with same name. 
+But OMG this is so slow. I will try to increase the memory in the next step, but before that let's check what the RAM is...
+
+(Get-CimInstance -ClassName Win32_ComputerSystem).TotalPhysicalMemory / 1GB
+Whoa! It's huuuge....   1023.66285324097 GB
+
+I can increase the RAM but the bottleneck seems to be the network speed. So, I won't do the pseudo-parallel processing and instead create temporary files locally, compress them and then copy them over the network.
+Apparently, it might even be faster for Amira because although it would use more CPU to decompress on the fly, it's the network which was taking so long.
+Ok I copy pasted code on C:\opt, as just C: is not allowed. Now let's see...
+"Navigate to the folder where you saved the script"
+
+
+
+I am testing a temporary source folder with 2 tiffs, in the same directory, and the ps1 file in the C: drive. Will call from Powershell.
+
+
+
 
 
 
