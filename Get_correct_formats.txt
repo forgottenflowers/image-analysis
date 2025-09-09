@@ -212,6 +212,172 @@ openjdk version "1.8.0_322"
 OpenJDK Runtime Environment (Zulu 8.60.0.21-CA-win64) (build 1.8.0_322-b06)
 OpenJDK 64-Bit Server VM (Zulu 8.60.0.21-CA-win64) (build 25.322-b06, mixed mode)
 
+------------- 09.09.2025 (OME Tiffs) (SuperMicro)
+
+PS C:\Users\sysgen> cd
+PS C:\Users\sysgen> cd Desktop
+PS C:\Users\sysgen\Desktop> Get-ChildItem
+
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*;" loci.formats.tools.ImageConverter "C:\Users\sysgen\Desktop\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif" "C:\Users\sysgen\Desktop\\converted.ome.tif"
+
+Error: Could not find or load main class loci.formats.tools.ImageConverter
+
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*;" loci.formats.tools.ImageConverter 
+
+Error: Could not find or load main class loci.formats.tools.ImageConverter
+
+Downloaded bioformats_package.jar from here (https://downloads.openmicroscopy.org/bio-formats/8.3.0/artifacts/)
+
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -jar "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\bioformats_package.jar" "C:\Users\sysgen\Desktop\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif" "C:\Users\sysgen\Desktop\converted.ome.tif"
+
+The bio-formats viewer is now open and I cannot see any saved coverted.ome.tif. Well at least this shows the bioformat now works?
+
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space.
+
+To check things are wired up correctly before using the command, run
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\bioformats_package.jar"  loci.formats.tools.BfConvert
+
+Error: Could not find or load main class loci ...
+
+We need all jars, so
+
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*" loci.formats.tools.BfConvert
+
+Error: Could not find or load ..
+
+But this works:
+
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*" loci.formats.tools.ImageConverter
+
+To convert a file between formats, run:
+  bfconvert [-debug] [-stitch] [-separate] [-merge] [-expand]
+    [-bigtiff] [-nobigtiff] [-compression codec] [-series series] [-noflat]
+    [-cache] [-cache-dir dir] [-no-sas]
+    [-map id] [-range start end] [-crop x,y,w,h]
+    [-channel channel] [-z Z] [-timepoint timepoint] [-nogroup]
+    [-nolookup] [-autoscale] [-version] [-no-upgrade] [-padded]
+    [-option key value] [-novalid] [-validate] [-tilex tileSizeX]
+    [-tiley tileSizeY] [-pyramid-scale scale]
+    [-swap dimensionsOrderString] [-fill color]
+    [-precompressed] [-quality compressionQuality]
+    [-pyramid-resolutions numResolutionLevels] in_file out_file
+
+            -version: print the library version and exit
+         -no-upgrade: do not perform the upgrade check
+              -debug: turn on debugging output
+             -stitch: stitch input files with similar names
+           -separate: split RGB images into separate channels
+              -merge: combine separate channels into RGB image
+             -expand: expand indexed color to RGB
+            -bigtiff: force BigTIFF files to be written
+          -nobigtiff: do not automatically switch to BigTIFF
+        -compression: specify the codec to use when saving images
+             -series: specify which image series to convert
+             -noflat: do not flatten subresolutions
+              -cache: cache the initialized reader
+          -cache-dir: use the specified directory to store the cached
+                      initialized reader. If unspecified, the cached reader
+                      will be stored under the same folder as the image file
+             -no-sas: do not preserve the OME-XML StructuredAnnotation elements
+                -map: specify file on disk to which name should be mapped
+              -range: specify range of planes to convert (inclusive)
+            -nogroup: force multi-file datasets to be read as individual                      files
+           -nolookup: disable the conversion of lookup tables
+          -autoscale: automatically adjust brightness and contrast before
+                      converting; this may mean that the original pixel
+                      values are not preserved
+          -overwrite: always overwrite the output file, if it already exists
+        -nooverwrite: never overwrite the output file, if it already exists
+               -crop: crop images before converting; argument is 'x,y,w,h'
+            -channel: only convert the specified channel (indexed from 0)
+                  -z: only convert the specified Z section (indexed from 0)
+          -timepoint: only convert the specified timepoint (indexed from 0)
+             -padded: filename indexes for series, z, c and t will be zero padded
+             -option: add the specified key/value pair to the options list
+            -novalid: will not validate the OME-XML for the output file
+           -validate: will validate the generated OME-XML for the output file
+              -tilex: image will be converted one tile at a time using the given tile width
+              -tiley: image will be converted one tile at a time using the given tile height
+      -pyramid-scale: generates a pyramid image with each subsequent resolution level divided by scale
+-pyramid-resolutions: generates a pyramid image with the given number of resolution levels
+      -no-sequential: do not assume that planes are written in sequential order
+               -swap: override the default input dimension order; argument is f.i. XYCTZ
+               -fill: byte value to use for undefined pixels (0-255)
+      -precompressed: transfer compressed bytes from input dataset directly to output.
+                      Most input and output formats do not support this option.
+                      Do not use -crop, -fill, or -autoscale, or pyramid generation options
+                      with this option.
+            -quality: double quality value for JPEG compression (0-1)
+
+The extension of the output file specifies the file format to use
+for the conversion. The list of available formats and extensions is:
+
+ * Animated PNG: .png
+ * Audio Video Interleave: .avi
+ * CellH5 File Format: .ch5
+ * DICOM: .dcm
+ * Encapsulated PostScript: .eps, .epsi
+ * Image Cytometry Standard: .ids, .ics
+ * JPEG: .jpg, .jpeg, .jpe
+ * JPEG-2000: .jp2
+ * Java source code: .java
+ * OME-TIFF: .ome.tif, .ome.tiff, .ome.tf2, .ome.tf8, .ome.btf
+ * OME-XML: .ome, .ome.xml
+ * QuickTime: .mov
+ * Tagged Image File Format: .tif, .tiff, .tf2, .tf8, .btf
+ * Vaa3d: .v3draw
+
+Some file formats offer multiple compression schemes that can be set
+using the -compression option. The list of available compressions is:
+
+ * DICOM: Uncompressed, JPEG, JPEG-2000
+ * JPEG-2000: JPEG-2000 Lossy, JPEG-2000
+ * OME-TIFF: Uncompressed, LZW, JPEG-2000, JPEG-2000 Lossy, JPEG, zlib
+ * OME-XML: Uncompressed, zlib
+ * QuickTime: Uncompressed
+ * Tagged Image File Format: Uncompressed, LZW, JPEG-2000, JPEG-2000 Lossy, JPEG, zlib
+
+If any of the following patterns are present in out_file, they will
+be replaced with the indicated metadata value from the input file.
+
+   Pattern:     Metadata value:
+   ---------------------------
+   %s           series index
+   %n           series name
+   %c           channel index
+   %w           channel name
+   %z           Z index
+   %t           T index
+   %A           acquisition timestamp
+   %x           row index of the tile
+   %y           column index of the tile
+   %m           overall tile index
+
+If any of these patterns are present, then the images to be saved
+will be split into multiple files.  For example, if the input file
+contains 5 Z sections and 3 timepoints, and out_file is
+
+  converted_Z%z_T%t.tiff
+
+then 15 files will be created, with the names
+
+  converted_Z0_T0.tiff
+  converted_Z0_T1.tiff
+  converted_Z0_T2.tiff
+  converted_Z1_T0.tiff
+  ...
+  converted_Z4_T2.tiff
+
+Each file would have a single image plane.
+
+Ok so now back to the original command:
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*;" loci.formats.tools.ImageConverter "C:\Users\sysgen\Desktop\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif" "C:\Users\sysgen\Desktop\converted.ome.tif"
+
+It works very well! Tested in Amira. Now testing a different path (in shared drive)...
+
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*;" loci.formats.tools.ImageConverter "T:\tomo\Shreya\2505_soleil_recon_FijiTIFfiles\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif" "T:\tomo\Shreya\2505_soleil_recon_OMEfiles\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.ome.tif"
+
+
 
 
 
