@@ -433,6 +433,11 @@ powershell -ExecutionPolicy Bypass -File "C:\Users\sysgen\Desktop\convert_imajeJ
 
 Trying to buffer the log, somehow I suspect could be the reason things took longer?
 It's still just taking sooo long... everything just takes sooo long!
+
+012 small file but still!
+[done]
+1348.278s elapsed (122.46924+514.3628ms per plane, 4812ms overhead)
+
 Ok, I'm gonna completely drop logging, just keep the simple loop running for the next few days.
 
 
