@@ -438,11 +438,16 @@ Try -compression JPEG-2000 or -compression ZIP in ImageConverter — sometimes t
 Does Amira accept the compressed file?
 
 
-In the meantime, I check the performance of the ps1 script with 006:
+In the meantime, I check the performance of the ps1 script with 006:   ---> convert_imajeJ_tif_to_ome_single
 
 powershell -ExecutionPolicy Bypass -File "C:\Users\sysgen\Desktop\convert.ps1"
 
-Now, try with multiple files in folder...
+[done]
+2533.562s elapsed (306.30225+907.77686ms per plane, 5522ms overhead)
+
+Now, try with multiple files in folder (for now, I put only 3 files in that folder)    ---> convert_imajeJ_tif_to_ome
+
+powershell -ExecutionPolicy Bypass -File "C:\Users\sysgen\Desktop\convert_all.ps1"
 
 
 
