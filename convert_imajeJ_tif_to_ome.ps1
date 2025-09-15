@@ -15,8 +15,10 @@ if (!(Test-Path $outputFolder)) {
     New-Item -ItemType Directory -Path $outputFolder | Out-Null
 }
 
-# Start logging
-"=== Conversion started: $(Get-Date) ===" | Out-File -FilePath $logFile -Encoding UTF8
+# Initialize a log buffer (array of strings)
+$logBuffer = @()
+$logBuffer += "=== Conversion started: $(Get-Date) ==="
+
 
 # --- Loop through all .tif files in input folder
 Get-ChildItem -Path $inputFolder -Filter *.tif | ForEach-Object {
@@ -26,7 +28,7 @@ Get-ChildItem -Path $inputFolder -Filter *.tif | ForEach-Object {
 
     $message = "Converting $inputFile -> $outputFile"
     Write-Host $message
-    $message | Out-File -FilePath $logFile -Append -Encoding UTF8
+    $logBuffer += $message
 
     #try {
     #    & $javaExe -cp $classPath $mainClass $inputFile $outputFile 2>&1 | Out-File -FilePath $logFile -Append -Encoding UTF8
@@ -43,4 +45,8 @@ Get-ChildItem -Path $inputFolder -Filter *.tif | ForEach-Object {
     & $javaExe -cp $classPath $mainClass $inputFile $outputFile
 }
 
-"=== Conversion finished: $(Get-Date) ===" | Out-File -FilePath $logFile -Append -Encoding UTF8
+
+$logBuffer += "=== Conversion finished: $(Get-Date) ==="
+
+# Write the entire buffer to the log file once
+$logBuffer | Out-File -FilePath $logFile -Encoding UTF8
