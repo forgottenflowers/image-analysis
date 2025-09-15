@@ -4,13 +4,10 @@ name=Untitled, dir=, width=2648, height=2648, nImages=2048, offset=375, type=ush
 
 When dealing with TIFF image stacks larger than 4GB, many standard TIFF readers will only open the first image due to the 4GB file size limitation of the standard TIFF format. To access the entire stack, it's necessary to open the file as raw data and interpret the header information. This approach allows you to bypass the limitations of the TIFF reader and access the individual images within the stack. 
 Here's a breakdown of why this happens and how to address it:
-
-Problem:
-4GB Limit:
+Problem: 4GB Limit:
 Standard TIFF files use 32-bit offsets, which inherently limit their size to around 4GB. 
 BigTIFF:
 For larger files, the BigTIFF format, which uses 64-bit offsets, is needed to support files larger than 4GB. 
-
 ImageJ's Behavior:
 ImageJ, when saving TIFF stacks larger than 4GB, often uses a non-standard format where it saves a fake TIFF header with the first image and then appends the rest of the image data (as raw data) to the end of the file. 
 
@@ -28,8 +25,6 @@ Specialized libraries like TIFFStack (GitHub) DylanMuir/TIFFStack: Support for I
 3. Handle the File Structure:
 If the TIFF stack was saved with a raw data section appended to the end (as is common with ImageJ), you'll need to read the raw data accordingly, potentially skipping the initial TIFF header. 
 
-
-
 ImageJ can generally open TIFF files it has created, but it might encounter issues with certain TIFF types, especially those created with specific configurations or those exceeding certain size limitations. ImageJ's own TIFF reader has limitations and might not handle all valid TIFF files correctly, including some that are written by other software. 
 
 ImageJ's TIFF Reader:
@@ -42,46 +37,9 @@ If you encounter problems opening a TIFF file in ImageJ, it's often recommended 
 Alternatives:
 If you're still having trouble opening a file, other image processing software like GIMP or QuPath might be able to handle it. 
 
-
-When I try to open this, it opens but probably not the whole thing:
->>>>>>>>>>>>>>>>>>>>>>>>>>>
-<Out of memory>
-<All available memory (11580MB) has been>
-<used. To make more available, use the>
-<Edit>Options>Memory & Threads command.>
->>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
-
-
-
-A thread:
-https://forum.image.sc/t/convert-vff-format-to-tiff/82974
-- Hi Curtis, our image processing team needs to import an image sequence in volume or VFF format and save or export as TIFF. How do we do this in ImageJ. We have been using Dragonfly, but were hoping that the ImageJ team could help us do this diectly in ImageJ. Is there a plugin for this perhaps?
-- The first thing I would suggest is to try to use Fiji to open your VFF file, then save the resulting image to a TIFF. Fiji comes with Bioformats, which says it can open VFF files, so I’m hopeful that it will be straightforward.
-- Hi, I tried to open the image sequence in both ImageJ and Fiji and also tried Bioformats. The software does not recognize .vol or .vgi formats, even using bioformats. Any suggestions?
-- are your vgi/vol related to x-ray images processed with VGStudioMax (.vgi some kB, .vol several GB size)? If not, skip reading.
-
-The .vgi is plain text, open it with Drag and Drop to the “>>”-Button (rightmost button) or in any text editor. The *.vol is a binary file, open it with File / Import / Raw… and enter the values you find in the *.vgi:
-
-Image type: search for “bitsperelement”, “datatype” and “data range”, e.g. for “bitsperelement = 16”, “datatype = unsigned integer” and “datarange = 0 65535” you use Image type “16-bit Unsigned”
-Width, Height, Number of images: look for “Size” and take the 3 numbers in this line
-Offset to first image = 0
-Gap between images = 0
-Little-endian byte order = ticked
-Before saving the tiff take the values in the lines starting with “resolution” and “unit” and set Pixel width / Pixel height / Voxel depth according to these values.
-
-There may be mirroring necessary search for “Mirror = 0 0 0”, if one of these is a 1 the corresponding dimension is mirrored. You need enough memory, at least the size of the *.vol (x × y × z × bit-depth), otherwise open it as virtual stack.
-
-Best regards,
-Guenter Pudmich
-
-
-
-
+-------------------------------------------------------------------------------------------------------------------------------------
 
 File>New>Script
-
 
 how to open the windows command line?
 Press the Windows key + r. In the Run box, type cmd, and then click Ok. This opens the Command Prompt window.
@@ -100,6 +58,8 @@ https://imagej.net/learn/headless
 https://imagej.net/imagej-wiki-static/Jython_Scripting_Examples
 https://docs.python.org/3/library/io.html
 https://stackoverflow.com/questions/21140840/run-fiji-from-command-line
+
+-------------------------------------------------------------------------------------------------------------------------------------
 
 ---------- 11.08.2025 (SuperMicro)
 
@@ -135,6 +95,7 @@ C:\opt\Fiji_Interdent_Oleksandra\Fiji.app>Stack is larger than 4GB. Most TIFF re
 name=Untitled, dir=, width=2648, height=2648, nImages=2048, offset=218, gap=0, type=, byteOrder=big, format=0, url=, whiteIsZero=f, lutSize=0, comp=1, ranges=null, samples=1
 Image saved successfully.
 Time elapsed: 501.14 seconds
+
 
 ---------- 13.08.2025 (RX Recon)
 Reading vol info
@@ -172,7 +133,9 @@ name=Untitled, dir=, width=2648, height=2648, nImages=2048, offset=206, type=ush
 (u'G:/trial_data/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj/055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif', '    Time elapsed: 285.79 seconds')
 
 ok, last line was corrected, now we shall try both
+hello ---> convert_to_imageJ_tiffs
 
+-------------------------------------------------------------------------------------------------------------------------------------
 
 
 ------------- 01.09.2025 (OME Tiffs) (SuperMicro)
@@ -250,6 +213,7 @@ But this works:
 
 & "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*" loci.formats.tools.ImageConverter
 
+-------------------------------------------------------------------------------------------------------------------------------------
 To convert a file between formats, run:
   bfconvert [-debug] [-stitch] [-separate] [-merge] [-expand]
     [-bigtiff] [-nobigtiff] [-compression codec] [-series series] [-noflat]
@@ -370,6 +334,7 @@ then 15 files will be created, with the names
   converted_Z4_T2.tiff
 
 Each file would have a single image plane.
+-------------------------------------------------------------------------------------------------------------------------------------
 
 Ok so now back to the original command:
 & "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*;" loci.formats.tools.ImageConverter "C:\Users\sysgen\Desktop\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif" "C:\Users\sysgen\Desktop\converted.ome.tif"
@@ -387,12 +352,6 @@ Whoa! It's huuuge....   1023.66285324097 GB
 I can increase the RAM but the bottleneck seems to be the network speed. So, I won't do the pseudo-parallel processing and instead create temporary files locally, compress them and then copy them over the network.
 Apparently, it might even be faster for Amira because although it would use more CPU to decompress on the fly, it's the network which was taking so long.
 Ok I copy pasted code on C:\opt, as just C: is not allowed. Now let's see...
-"Navigate to the folder where you saved the script"
-
-
-
-I am testing a temporary source folder with 2 tiffs, in the same directory, and the ps1 file in the C: drive. Will call from Powershell.
-
 
 
 
@@ -436,7 +395,7 @@ If the goal is saving more space (but still lossless):
 Try -compression JPEG-2000 or -compression ZIP in ImageConverter — sometimes they shrink high-entropy scientific images better than LZW.
 
 Does Amira accept the compressed file?
-
+... v v v slow, but opened and works well... anyway, we don't continue this.
 
 In the meantime, I check the performance of the ps1 script with 006:   ---> convert_imajeJ_tif_to_ome_single
 
@@ -449,5 +408,18 @@ Now, try with multiple files in folder (for now, I put only 3 files in that fold
 
 powershell -ExecutionPolicy Bypass -File "C:\Users\sysgen\Desktop\convert_all.ps1"
 
+008
+[done]
+1686.917s elapsed (174.12354+626.5337ms per plane, 4725ms overhead)
 
+010 -- it still worked?
+Exception in thread "main" java.io.FileNotFoundException: T:\tomo\Shreya\2505_soleil_recon_OMEfiles\010_pm025_tip_20x_325nm_300ms_36p5keV_gap5p5mm_0_16b.ome.tif (The process cannot access the file because it is being used by another process)
+
+007
+[done]
+2501.2s elapsed (306.14453+891.9048ms per plane, 4498ms overhead)
+
+Now I will try with log file...
+
+powershell -ExecutionPolicy Bypass -File "C:\Users\sysgen\Desktop\convert_imajeJ_tif_to_ome.ps1"
 
