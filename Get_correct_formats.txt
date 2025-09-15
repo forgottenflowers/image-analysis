@@ -423,3 +423,17 @@ Now I will try with log file...
 
 powershell -ExecutionPolicy Bypass -File "C:\Users\sysgen\Desktop\convert_imajeJ_tif_to_ome.ps1"
 
+140
+[done]
+3191.772s elapsed (422.1421+1112.8765ms per plane, 4945ms overhead)
+
+005
+[done]
+2869.799s elapsed (322.1416+1057.0918ms per plane, 4610ms overhead)
+
+Trying to buffer the log, somehow I suspect could be the reason things took longer?
+It's still just taking sooo long... everything just takes sooo long!
+Ok, I'm gonna completely drop logging, just keep the simple loop running for the next few days.
+
+
+
