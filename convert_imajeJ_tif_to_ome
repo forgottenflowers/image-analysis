@@ -6,7 +6,7 @@
 
 # or, run this as: 
 # PS C:\Users\sysgen\> cd ../..
-# PS C:\> powershell -ExecutionPolicy Bypass -File "C:\Users\sysgen\Desktop\convert.ps1"
+# PS C:\> powershell -ExecutionPolicy Bypass -File "C:\Users\sysgen\Desktop\convert_imajeJ_tif_to_ome.ps1"
 
 $javaExe = "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe"
 $classPath = "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*;"
