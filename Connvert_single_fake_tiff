@@ -1,1 +1,5 @@
+in Powershell, type:
 
+cd ../..
+
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*;" loci.formats.tools.ImageConverter "T:\tomo\Shreya\2505_soleil_recon_FijiTIFfiles\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif" "T:\tomo\Shreya\2505_soleil_recon_OMEfiles\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.ome.tif"
