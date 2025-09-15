@@ -440,5 +440,7 @@ It's still just taking sooo long... everything just takes sooo long!
 
 Ok, I'm gonna completely drop logging, just keep the simple loop running for the next few days.
 
+powershell -ExecutionPolicy Bypass -File "C:\Users\sysgen\Desktop\ome_fastsimpledirty.ps1"
 
+Ok now i let it run for God knows how many days!
 
