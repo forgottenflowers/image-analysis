@@ -396,9 +396,53 @@ I am testing a temporary source folder with 2 tiffs, in the same directory, and 
 
 
 
+------------- 15.09.2025 (OME Tiffs) (SuperMicro)
+
+cd ../..
+
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*;" loci.formats.tools.ImageConverter "T:\tomo\Shreya\2505_soleil_recon_FijiTIFfiles\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif" "T:\tomo\Shreya\2505_soleil_recon_OMEfiles\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.ome.tif"
+
+do it for: 004_pv005_tip_2x_3p1um_30ms_25cm_45keV_gap6p7mm_0_16b
+
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*;" loci.formats.tools.ImageConverter "T:\tomo\Shreya\2505_soleil_recon_FijiTIFfiles\004_pv005_tip_2x_3p1um_30ms_25cm_45keV_gap6p7mm_0_16b.tif" "T:\tomo\Shreya\2505_soleil_recon_OMEfiles\004_pv005_tip_2x_3p1um_30ms_25cm_45keV_gap6p7mm_0_16b.ome.tif"
+
+[done]
+2811.961s elapsed (335.80713+1014.16797ms per plane, 6153ms overhead)
+
+Now I'm gonna try LZW lossless compression for the original (055) to compare and check if Amira picks it (might need more calculation from AMira I guess but that might not be such a big problem). I'm saving directly in my drive (also to avoid output filename conflict):
+
+& "C:\opt\Fiji_Shreya\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre\bin\java.exe" -cp "C:\opt\Fiji_Shreya\Fiji.app\jars\bio-formats\*;C:\opt\Fiji_Shreya\Fiji.app\jars\*;" loci.formats.tools.ImageConverter -compression LZW "T:\tomo\Shreya\2505_soleil_recon_FijiTIFfiles\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.tif" "E:\soleil_recon\055_pv036_tip_2x_3p08_30ms_HA_250mm_45keV_gap6p7mm_Cu0p45_3900prj_0_16b.ome.tif"
+
+Oh lol but to make it faster, it probably should be saved locally first in a temp file and then sent over the network, no? Anyway, let's see first whether Amira accepts this or not.
+
+[done]
+1565.763s elapsed (185.76807+573.68506ms per plane, 5734ms overhead)
+but sizes are like 28,133,670 KB vs 26,644,651 KB (28 GB vs 26 GB) - is it worth it?
+28,047,617 KB was the imageJ fake tiff size. Hmm... I think not worth it.
+I mean this kind of compression wouldn't even affect the network speed! Which was the goal in the first place!
+
+⚖️ Is it worth it?
+Yes, if:
+- You’re archiving huge datasets long-term and every % matters (e.g., petabytes of storage).
+- You want to standardize on OME-TIFF with compression enabled for interoperability (many facilities do this just to have a consistent policy).
+- You might later switch to stronger compression (like JPEG-2000 lossless or Zlib/ZIP) but want the option to recompress without changing the pipeline.
+
+No, if:
+- Disk space isn’t an issue (you’ve got plenty of storage).
+- The extra CPU time to compress/decompress slightly slows down workflows but doesn’t give meaningful size savings.
+- You mainly care about read/write speed — uncompressed OME-TIFF is faster to load in Fiji/OME tools than compressed.
+
+If the goal is saving more space (but still lossless):
+Try -compression JPEG-2000 or -compression ZIP in ImageConverter — sometimes they shrink high-entropy scientific images better than LZW.
+
+Does Amira accept the compressed file?
 
 
+In the meantime, I check the performance of the ps1 script with 006:
 
+powershell -ExecutionPolicy Bypass -File "C:\Users\sysgen\Desktop\convert.ps1"
+
+Now, try with multiple files in folder...
 
 
 
