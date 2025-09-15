@@ -7,10 +7,16 @@ $mainClass = "loci.formats.tools.ImageConverter"
 $inputFolder  = "T:\tomo\Shreya\2505_soleil_recon_FijiTIFfiles"
 $outputFolder = "T:\tomo\Shreya\2505_soleil_recon_OMEfiles"
 
-# --- Make sure output folder exists
+# --- Log file path (append date/time so you don’t overwrite old logs)
+$logFile = "C:\Users\sysgen\Desktop\convert_log_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt"
+
+# Make sure output folder exists
 if (!(Test-Path $outputFolder)) {
     New-Item -ItemType Directory -Path $outputFolder | Out-Null
 }
+
+# Start logging
+"=== Conversion started: $(Get-Date) ===" | Out-File -FilePath $logFile -Encoding UTF8
 
 # --- Loop through all .tif files in input folder
 Get-ChildItem -Path $inputFolder -Filter *.tif | ForEach-Object {
@@ -18,7 +24,23 @@ Get-ChildItem -Path $inputFolder -Filter *.tif | ForEach-Object {
     $baseName   = [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
     $outputFile = Join-Path $outputFolder ($baseName + ".ome.tif")
 
-    Write-Host "Converting $inputFile -> $outputFile"
+    $message = "Converting $inputFile -> $outputFile"
+    Write-Host $message
+    $message | Out-File -FilePath $logFile -Append -Encoding UTF8
+
+    #try {
+    #    & $javaExe -cp $classPath $mainClass $inputFile $outputFile 2>&1 | Out-File -FilePath $logFile -Append -Encoding UTF8
+    #    if ($LASTEXITCODE -eq 0) {
+    #        "SUCCESS: $outputFile created" | Out-File -FilePath $logFile -Append -Encoding UTF8
+    #    } else {
+    #        "ERROR: Conversion failed for $inputFile (exit code $LASTEXITCODE)" | Out-File -FilePath $logFile -Append -Encoding UTF8
+    #    }
+    #}
+    #catch {
+    #    "EXCEPTION: $($_.Exception.Message)" | Out-File -FilePath $logFile -Append -Encoding UTF8
+    #}
 
     & $javaExe -cp $classPath $mainClass $inputFile $outputFile
 }
+
+"=== Conversion finished: $(Get-Date) ===" | Out-File -FilePath $logFile -Append -Encoding UTF8
