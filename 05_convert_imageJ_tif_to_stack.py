@@ -43,6 +43,7 @@ for tif_path in tif_files:
 
 print("done...")
 
-
+# ----------------------------------------------------------------------------------------------
+# open windows command line: Press the Windows key + r. In the Run box, type cmd, and then click Ok. This opens the Command Prompt window.
 # cd C:\opt\Fiji_Interdent_Oleksandra\Fiji.app
-# ImageJ-win64_Interdent.exe --ij2 --headless --console --run "C:\Users\sysgen\Desktop\hello.py"
+# ImageJ-win64_Interdent.exe --ij2 --headless --console --run "C:\Users\sysgen\Desktop\try.py"
