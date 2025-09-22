@@ -42,3 +42,7 @@ for tif_path in tif_files:
     logging.info("%s    Time elapsed: %.2f seconds", out_path, elapsed)
 
 print("done...")
+
+
+# cd C:\opt\Fiji_Interdent_Oleksandra\Fiji.app
+# ImageJ-win64_Interdent.exe --ij2 --headless --console --run "C:\Users\sysgen\Desktop\hello.py"
