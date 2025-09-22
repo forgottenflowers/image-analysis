@@ -21,13 +21,13 @@ for tif_path in tif_files:
     start_time = time.time()
     print("working...")
     
-    # Path to the matching .vol file
-    infofilename = os.path.basename(vol_info_path)  #with extensions
-    datafoldername = infofilename.replace("_0.vol.info","") 
-    vol_data_path = vol_data_dir + "/" + datafoldername + "/" + datafoldername + "_0_16b.vol"
+    # Get output directory name
+    base = os.path.basename(tif_path)
+    foldername = infofilename.replace(".tif","")
     
-     # Path to output directory
-    out_dir = out_path + vol_data_dir + "/" + datafoldername + "/" + datafoldername + "_0_16b.tif"
+    # Create output directory in the output path
+    out_dir = os.path.join(out_path, foldername)
+    os.makedirs(out_dir, exist_ok=True)                 # won't fail if it already exists
     
     # Get the active image (ImagePlus object)
     imp = IJ.getImage()
