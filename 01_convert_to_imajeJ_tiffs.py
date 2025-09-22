@@ -76,3 +76,6 @@ for vol_info_path in vol_info_files:
     logging.info("%s    Time elapsed: %.2f seconds", out_path, elapsed)
 
 print("done...")
+
+# ----------------------------------------------------------------------------------------------
+# open windows command line: Press the Windows key + r. In the Run box, type cmd, and then click Ok. This opens the Command Prompt window.
