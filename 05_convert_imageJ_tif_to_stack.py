@@ -23,23 +23,24 @@ for tif_path in tif_files:
     
     # Get output directory name
     base = os.path.basename(tif_path)
-    foldername = infofilename.replace(".tif","")
+    foldername = os.path.splitext(base)[0]
     
     # Create output directory in the output path
     out_dir = os.path.join(out_path, foldername)
     os.makedirs(out_dir, exist_ok=True)                 # won't fail if it already exists
     
-    # Get the active image (ImagePlus object)
-    imp = IJ.getImage()
+    # Open the image (ImagePlus object)
+    imp = IJ.openImage(tif_path)
 
    # Run the macro to save as multiple tiff files as slices of a stack into the output directory
-    IJ.run("Image Sequence... ", "format=TIFF save="+out_dir)
+    IJ.run(imp, "Image Sequence... ", "format=TIFF save="+out_dir)
 
     # Close image to free memory
     imp.close()
+    IJ.run("Collect Garbage")
 
     elapsed = time.time() - start_time
-    logging.info("%s    Time elapsed: %.2f seconds", out_path, elapsed)
+    logging.info("%s    Time elapsed: %.2f seconds", out_dir, elapsed)
 
 print("done...")
 
@@ -47,3 +48,4 @@ print("done...")
 # open windows command line: Press the Windows key + r. In the Run box, type cmd, and then click Ok. This opens the Command Prompt window.
 # cd C:\opt\Fiji_Interdent_Oleksandra\Fiji.app
 # ImageJ-win64_Interdent.exe --ij2 --headless --console --run "C:\Users\sysgen\Desktop\try.py"
+# Ctr+C to interrupt code and end it
