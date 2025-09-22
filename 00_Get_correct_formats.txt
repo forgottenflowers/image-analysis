@@ -444,3 +444,16 @@ powershell -ExecutionPolicy Bypass -File "C:\Users\sysgen\Desktop\ome_fastsimple
 
 Ok now i let it run for God knows how many days!
 
+
+
+------------- 22.09.2025 (Tiffs) (SuperMicro)
+
+We not only abandon but we delete all the OME tif files. Because the shared drive is full. Also, OME tif files are slow to load on Amira. Interestingly, just a folder with individual tiffs loads fastest in both imageJ and Amira. Then why not? It seems to be a universal format.
+
+My plan is to have all the folders of the tiffs on the shared drive. We can get rid of fake tiffs after that even. 
+
+Then get them on RX Recon. And start their analysis. This computer is too slow even for image J. Possibly some automated processes can be run.
+
+Step 0 = classify/group !
+Then we start step 1 of the preprocessing = delete empty stacks
+step 2 = crop
