@@ -13,8 +13,8 @@ log_path = "C:/Users/shra13/Desktop/multipletiff_log_file.txt"
 # Save log
 logging.basicConfig(filename=log_path, level=logging.INFO, format="%(asctime)s - %(message)s")
 
-# Get all .tif files
-tif_files = glob.glob(os.path.join(in_path, "*.tif"))
+# Get all .tif files with correct slashes compatible with Fiji
+tif_files = [f.replace("\\", "/") for f in glob.glob(os.path.join(in_path, "*.tif"))]
 
 # Loop over each .tif file
 for tif_path in tif_files:
@@ -31,12 +31,13 @@ for tif_path in tif_files:
     out_dir = os.path.join(out_path, foldername)
     if not os.path.exists(out_dir):                     # Python 3.2: os.makedirs(out_dir, exist_ok=True)
         os.makedirs(out_dir)
-    
+    out_dir = out_dir.replace("\\", "/")                # Format required for ImageJ macro
+
     # Open the image (ImagePlus object)
     imp = IJ.openImage(tif_path)
 
    # Run the macro to save as multiple tiff files as slices of a stack into the output directory
-    IJ.run(imp, "Image Sequence... ", "format=TIFF save="+out_dir)
+    IJ.run(imp, "Image Sequence... ", "format=TIFF save=" + out_dir)
 
     # Close image to free memory
     imp.close()
