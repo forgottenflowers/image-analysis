@@ -36,7 +36,7 @@ for tif_path in tif_files:
     # Open the image (ImagePlus object)
     imp = IJ.openImage(tif_path)
 
-   # Run the macro to save as multiple tiff files as slices of a stack into the output directory
+    # Run the macro to save as multiple tiff files as slices of a stack into the output directory
     IJ.run(imp, "Image Sequence... ", "format=TIFF save=" + out_dir)
 
     # Close image to free memory
